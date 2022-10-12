@@ -1,0 +1,7 @@
+2022-10-07 14:17:14.946 [main] INFO  be.abis.exercise.main.Main - hello
+2022-10-07 14:17:14.946 [main] INFO  be.abis.exercise.main.Main - hi
+2022-10-07 14:21:08.511 [main] INFO  be.abis.exercise.main.Main - hello
+2022-10-07 14:21:08.511 [main] INFO  be.abis.exercise.main.Main - hi
+2022-10-07 14:38:35.704 [main] ERROR be.abis.exercise.main.Main - there is no person with id: 11
+2022-10-07 15:26:16.131 [main] ERROR error - there is no person with id: 11
+2022-10-07 15:27:15.891 [main] ERROR error - there is no person with id: 11

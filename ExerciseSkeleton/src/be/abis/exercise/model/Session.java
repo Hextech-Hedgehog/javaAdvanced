@@ -2,10 +2,15 @@ package be.abis.exercise.model;
 
 import be.abis.exercise.exception.InvoiceException;
 
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public abstract class Session implements Service {
+	private static int sessionCounter = 0;
+	private String sessionId = "" + sessionCounter++;
 	private Course course;
 	private LocalDate date;
 	private Company location;
@@ -51,6 +56,10 @@ public abstract class Session implements Service {
 		this.instructor = instructor;
 	}
 
+	public String getSessionId() {
+		return this.sessionId;
+	}
+
 	public abstract Company getOrganizer();
 	
 	@Override
@@ -61,7 +70,17 @@ public abstract class Session implements Service {
 				+ " by " + this.getInstructor().toString() + " on " + fmt.format(this.getDate()) + ".";
 	}
 
-	public abstract double invoice() throws InvoiceException;
+	public String toString(String countryCode) {
+		Locale.setDefault(new Locale(countryCode));
+		String baseFileName = "be.abis.exercise.resources.applicationResources";
+		ResourceBundle rb = ResourceBundle.getBundle(baseFileName, new Locale(countryCode));
+		String key = "session";
+		DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+		String welcomeMessage = MessageFormat.format(rb.getString(key), this.getCourse().getTitle(), this.getLocation().getName(), this.getInstructor().toString(), fmt.format(this.getDate()));
 
+		return welcomeMessage;
+	}
+
+	public abstract double invoice() throws InvoiceException;
 
 }

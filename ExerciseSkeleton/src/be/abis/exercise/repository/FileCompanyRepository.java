@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import be.abis.exercise.model.Company;
+import org.apache.logging.log4j.LogManager;
 
 public class FileCompanyRepository implements CompanyRepository {
 	
@@ -17,14 +18,14 @@ public class FileCompanyRepository implements CompanyRepository {
 
 	public FileCompanyRepository(){
 		try {
-			List<String> compStrings = Files.readAllLines(Paths.get("c:\\temp\\javacourses\\companies.txt"));
+			List<String> compStrings = Files.readAllLines(Paths.get("C:\\Users\\Duser\\Documents\\companies.txt"));
 			for(String s:compStrings){
 				companies.add(new Company(s.trim()));
 			}
 			companies.trimToSize();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogManager.getLogger("error").error(e.getMessage());
 		}
 	}
 
@@ -46,7 +47,7 @@ public class FileCompanyRepository implements CompanyRepository {
 		    }
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LogManager.getLogger("error").error(e.getMessage());
 		}
 	}	
 
